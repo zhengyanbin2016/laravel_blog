@@ -22,3 +22,5 @@ Route::any('/admin/login','Admin\LoginController@login');
 Route::get('/admin/code','Admin\LoginController@code');
 //Route::get('/admin/getcode','Admin\LoginController@getcode');
 Route::any('/admin/crypt','Admin\LoginController@crypt');
+Route::any('/admin/index','Admin\IndexController@index');
+Route::any('/admin/info','Admin\IndexController@info');
