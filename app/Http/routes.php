@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 //Route::get('user/{id}', 'UserController@showProfile');
 Route::get('/test','IndexController@index');
+Route::get('/admin/login','Admin\LoginController@login');
