@@ -14,8 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 //Route::get('user/{id}', 'UserController@showProfile');
+Route::any('/admin/test','Admin\LoginController@test');
 Route::get('/test','IndexController@index');
 Route::any('/admin/login','Admin\LoginController@login');
 Route::get('/admin/code','Admin\LoginController@code');
 //Route::get('/admin/getcode','Admin\LoginController@getcode');
+Route::any('/admin/crypt','Admin\LoginController@crypt');

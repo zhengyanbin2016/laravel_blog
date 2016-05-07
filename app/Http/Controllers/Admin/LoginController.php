@@ -2,22 +2,35 @@
 
 namespace App\Http\Controllers\Admin;
 
-
-
+use App\Http\Models\User;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
 
 require_once '\resources\org\code\Code.class.php';
 class LoginController extends CommonController
 {
+    /*public function test()
+    {
+        $user = User::first();
+        print_r($user->user_name);
+        print_r($user->user_pass);
+    }*/
+
     public function login()
     {
         $code = new \Code;
         $_code = $code->get();
         if ($input=Input::all()){
-            if(strtoupper($input['code'])!=$_code){
+            if(strtoupper($input['code'])!==$_code){
                 return back()->with('msg','验证码错误');
             }
-            echo 'yan zheng tong guo';
+            $user = User::first();
+            if($input['user_name']!==$user->user_name||$input['user_pass']!==Crypt::decrypt($user->user_pass)){
+                return back()->with('msg','用户名或密码错误');
+            }
+            session(['user'=>$user]);
+            dd(session('user'));
+            echo '1111';
         }else{
             return view('admin.login');
         }
@@ -35,5 +48,15 @@ class LoginController extends CommonController
         $code = new \Code;
         echo $code->get();
     }*/
-    
+    public function crypt()
+    {
+        $str = '123456';
+        $str_p = 'eyJpdiI6IkxTVTN4SFd0YlQxK3JtQkR6cUEyUlE9PSIsInZhbHVlIjoiV3hUMWZpOXpcL1ZkaGNOSW9EQnpMNXc9PSIsIm1hYyI6ImJkNDQ4NzczY2I2MTk0NTQ0YmQ4MzVjOTcwOTMyMmViM2JlNzQ1MDg1ZDhjMWVhMmQ3YzNjYTNhYTBiNjk5MGUifQ';
+        echo Crypt::encrypt($str);
+        echo "<br/>";
+//        dd($str);enble to use dd();
+        echo Crypt::decrypt($str_p);
+    }
+
+
 }
