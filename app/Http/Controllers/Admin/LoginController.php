@@ -18,8 +18,9 @@ class LoginController extends CommonController
 
     public function login()
     {
-//        session_start();
+        $_SESSION['code'] = null;
         $code = new \Code;
+//        $code->make();
         $_code = $code->get();
         if ($input=Input::all()){
             if(strtoupper($input['code'])!==$_code){

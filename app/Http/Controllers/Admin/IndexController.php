@@ -10,7 +10,7 @@ class IndexController extends CommonController
 {
     public function index(){
 
-//        dd($_SESSION['user']);
+        
 
         return view('admin.index');
 
