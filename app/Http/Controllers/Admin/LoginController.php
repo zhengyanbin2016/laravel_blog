@@ -18,6 +18,7 @@ class LoginController extends CommonController
 
     public function login()
     {
+//        session_start();
         $code = new \Code;
         $_code = $code->get();
         if ($input=Input::all()){
@@ -28,9 +29,10 @@ class LoginController extends CommonController
             if($input['user_name']!==$user->user_name||$input['user_pass']!==Crypt::decrypt($user->user_pass)){
                 return back()->with('msg','用户名或密码错误');
             }
-            session(['user'=>$user]);
-            dd(session('user'));
-            echo '1111';
+            $_SESSION['user']=$user;
+//            dd(session('user'));
+//            dd($_SESSION['user']);
+            return redirect('admin/index');
         }else{
             return view('admin.login');
         }

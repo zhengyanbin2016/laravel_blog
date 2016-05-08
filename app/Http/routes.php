@@ -24,3 +24,9 @@ Route::get('/admin/code','Admin\LoginController@code');
 Route::any('/admin/crypt','Admin\LoginController@crypt');
 Route::any('/admin/index','Admin\IndexController@index');
 Route::any('/admin/info','Admin\IndexController@info');
+
+Route::group(['middleware' => ['admin.login']], function () {
+    Route::any('/admin/index','Admin\IndexController@index');
+    Route::any('/admin/info','Admin\IndexController@info');
+    Route::any('/admin/quit','Admin\IndexController@quit');
+});
